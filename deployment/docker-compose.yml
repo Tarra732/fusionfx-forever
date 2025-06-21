@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  strategist:
+    build: ..
+    container_name: strategist
+    command: python core/strategist_agent.py
+    restart: always
+
+  meta_controller:
+    build: ..
+    container_name: meta_controller
+    command: python core/meta_controller.py
+    restart: always
+
+  profit_manager:
+    build: ..
+    container_name: profit_manager
+    command: python core/profit_manager.py
+    restart: always
+
+  dao_governor:
+    build: ..
+    container_name: dao_governor
+    command: node agents/dao_governor.mjs
+    restart: always
+
+  cloud_nomad:
+    build: ..
+    container_name: cloud_nomad
+    command: python agents/cloud_nomad.py
+    restart: always
+
+  depin_manager:
+    build: ..
+    container_name: depin_manager
+    command: python agents/depin_manager.py
+    restart: always
+
+# Define more agent services below as needed...
