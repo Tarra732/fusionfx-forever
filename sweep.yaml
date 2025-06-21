@@ -1,0 +1,14 @@
+sweep: true
+auto_merge: true
+requirements:
+  - "python>=3.11"
+  - "oandapyV20==1.0.7"
+  - "ray[rllib]==2.22.0"
+  - "pyzmq==25.1.2"
+  - "python-telegram-bot==20.3"
+exclude_dirs:
+  - "logs"
+  - "backups"
+include_patterns:
+  - "**/*.py"
+  - "**/*.yaml"
