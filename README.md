@@ -242,4 +242,4 @@ docker-compose up --detach --scale strategist=3
 
 ## 📄 Related Docs
 
-- [`50_year_roadmap.pdf`](./50_year_roadmap.pdf) – Phase-by-phase evolution timeline and implementation strategy
+- 📄 [View the 50-Year Autonomy Roadmap](docs/50_year_plan.md) – Phase-by-phase evolution timeline and implementation strategy
