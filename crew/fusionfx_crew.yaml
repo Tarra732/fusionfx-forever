@@ -2,16 +2,17 @@ version: '3.0'
 agents:
   - id: quantum_guardian
     role: "Quantum Key Rotator"
-    command: "python core/utils/quantum_safe.py"
+    command: "python -m core.utils.quantum_safe"
     params:
       rotation_interval_days: 90
 
   - id: watchdog_heartbeat
     role: "Dead Man's Switch Monitor"
-    command: "python core/utils/dead_mans_switch.py"
+    command: "python -m core.utils.dead_mans_switch"
     params:
       interval_days: 365
       dao_address: "0xFXS...DAO"
+
   - id: meta_controller
     role: "Reinforcement Learning CEO"
     command: "python -m core.meta_controller"
