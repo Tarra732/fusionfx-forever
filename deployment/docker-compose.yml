@@ -5,36 +5,48 @@ services:
     build: ..
     container_name: strategist
     command: python core/strategist_agent.py
-    restart: always
+    restart: unless-stopped
 
   meta_controller:
     build: ..
     container_name: meta_controller
     command: python core/meta_controller.py
-    restart: always
+    restart: unless-stopped
 
   profit_manager:
     build: ..
     container_name: profit_manager
     command: python core/profit_manager.py
-    restart: always
+    restart: unless-stopped
 
   dao_governor:
-    build: ..
-    container_name: dao_governor
+    image: node:18
+    working_dir: /usr/src/app
+    volumes:
+      - ../:/usr/src/app
     command: node agents/dao_governor.mjs
-    restart: always
+    container_name: dao_governor
+    restart: unless-stopped
 
   cloud_nomad:
     build: ..
     container_name: cloud_nomad
     command: python agents/cloud_nomad.py
-    restart: always
+    restart: unless-stopped
 
   depin_manager:
     build: ..
     container_name: depin_manager
     command: python agents/depin_manager.py
-    restart: always
+    restart: unless-stopped
 
-# Define more agent services below as needed...
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    container_name: grafana-dashboard
+    restart: unless-stopped
+
+networks:
+  default:
+    driver: bridge..
