@@ -1,0 +1,91 @@
+version: '3.0'
+agents:
+  - id: meta_controller
+    role: "Reinforcement Learning CEO"
+    command: "python -m core.meta_controller"
+    params:
+      action_dim: 8
+      reward_fn: "sharpe*0.6 - sortino*0.4"
+
+  - id: strategist
+    role: "Chief Strategy Officer"
+    command: "python -m agents.strategist"
+    params:
+      evolution_cycle: "monthly"
+      max_new_pairs: 3
+
+  - id: profit_vault
+    role: "Autonomous CFO"
+    command: "python -m core.profit_manager"
+    params:
+      cold_wallets: 
+        binance: "0x7A..."
+        kraken: "0x3F..."
+      min_sweep: 10000
+
+  - id: execution_agent
+    role: "Broker Execution Specialist"
+    command: "python -m agents.execution"
+    params:
+      broker: "oanda"
+      slippage_limit: 1.2
+      fallback_broker: "forex.com"
+
+  - id: market_scanner
+    role: "Liquidity & Structure Scanner"
+    command: "python -m agents.market_scanner"
+    params:
+      pairs: ["EUR/USD"]
+      timeframes: ["15M", "4H"]
+
+  - id: predictor
+    role: "Forecast Engine"
+    command: "python -m agents.predictor"
+    params:
+      models: ["lightgbm", "timegpt"]
+      vix_source: "alphavantage"
+
+  - id: risk_kernel
+    role: "Risk Sizer"
+    command: "python -m agents.risk_kernel"
+    params:
+      base_risk: 0.1
+      vix_penalty_curve:
+        - threshold: 30
+          multiplier: 0.8
+        - threshold: 40
+          multiplier: 0.5
+
+  - id: self_healer
+    role: "System Health Monitor"
+    command: "python -m agents.self_healer"
+    params:
+      memory_threshold: 85
+      latency_threshold: 250
+      drawdown_threshold: 15
+
+  - id: compliance
+    role: "Regulatory Sentinel"
+    command: "python -m agents.compliance"
+    params:
+      jurisdictions: ["esma", "nfa", "asic"]
+
+workflow:
+  startup_sequence:
+    - meta_controller
+    - strategist
+    - market_scanner
+    - predictor
+    - risk_kernel
+    - execution_agent
+    - profit_vault
+    - self_healer
+
+monitoring:
+  alerts:
+    - type: "telegram"
+      channel: "@fusionfx_alerts"
+      events: ["trade_executed", "drawdown_exceeded"]
+    - type: "sms"
+      provider: "twilio"
+      events: ["system_failure", "manual_intervention_needed"]
