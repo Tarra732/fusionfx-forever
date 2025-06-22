@@ -5,7 +5,11 @@ from agents.market_scanner import MarketScanner
 from agents.risk_kernel import RiskKernel
 from agents.execution_agent import ExecutionAgent
 from datetime import datetime, time
-from utils.alerts import send_alert
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from utils.alerts import send_system_alert
 
 class FusionAgent:
     def __init__(self):
@@ -16,7 +20,7 @@ class FusionAgent:
         self.scanner = MarketScanner(
             pairs=["EUR/USD"],
             timeframes=["15M", "4H"],
-            adr_regime_threshold=0.0065
+            adr_threshold=0.0065
         )
         self.risk_kernel = RiskKernel(
             base_risk=0.1,
@@ -49,7 +53,7 @@ class FusionAgent:
 
             if self.is_london_open(now):
                 size = base_size * self.london_boost["multiplier"]
-                send_alert("🚀 London Boost Applied")
+                send_system_alert("🚀 London Boost Applied")
             else:
                 size = base_size
 
@@ -59,7 +63,7 @@ class FusionAgent:
                 "size": size
             }
 
-            send_alert(f"📥 Trade Signal: {order['direction']} {order['pair']} @ size {order['size']:.4f}")
+            send_system_alert(f"📥 Trade Signal: {order['direction']} {order['pair']} @ size {order['size']:.4f}")
             self.executor.execute_order(order)
 
 if __name__ == "__main__":

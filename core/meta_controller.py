@@ -1,6 +1,10 @@
 # core/meta_controller.py
 
 import numpy as np
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from agents.utils.portfolio import get_portfolio_metrics
 from agents.utils.logger import log_event
 from agents.utils.actions import ActionSpace

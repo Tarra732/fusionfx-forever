@@ -2,7 +2,7 @@
 
 import time
 import datetime
-from utils.alerts import send_telegram
+from core.utils.alerts import send_telegram
 
 HEARTBEAT_INTERVAL_MINUTES = 60  # Sends an update every hour
 

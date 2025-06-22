@@ -1,0 +1,32 @@
+[
+  {
+    "pair": "EUR/USD",
+    "direction": "buy",
+    "size": 1000,
+    "price": 1.1,
+    "pnl": 10.0,
+    "timestamp": "2025-06-22T01:01:18.844484"
+  },
+  {
+    "pair": "EUR/USD",
+    "direction": "buy",
+    "size": 1000,
+    "price": 1.1,
+    "pnl": 10.0,
+    "timestamp": "2025-06-22T01:01:54.641565"
+  },
+  {
+    "timestamp": "2025-06-22T01:01:57.466988",
+    "instrument": "EUR/USD",
+    "units": 1000,
+    "fill_price": 1.1003,
+    "broker": "fallback",
+    "trade_id": "fallback_1750554117",
+    "execution_time_ms": 100,
+    "direction": "buy",
+    "size": 1000,
+    "stop_loss": null,
+    "take_profit": null,
+    "strategy_id": "unknown"
+  }
+]
